@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Панель</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+    <link rel="stylesheet" href="Revealator/fm.revealator.jquery.css">
+    <script src="Revealator/fm.revealator.jquery.js"></script>
+    <style>
+        .content{
+            margin-top: 80px;
+        }
+        .containPiano {
+            display: flex;
+            width: max-content;
+            flex-direction: row;
+            height: max-content;
+            margin: auto;
+        }
+        .notes {
+            position: relative;
+        }
+        .noteW {
+            background-color: white;
+            width: 90px;
+            height: 350px;
+            color: #555;
+            border-radius: 0px 0px 5px 5px;
+            border: 1px solid #777;
+        }
+        .noteW:first-child {
+            border-radius: 5px 0px 5px 5px;
+        }
+        .noteW:last-child {
+            border-radius: 0px 5px 5px 5px;
+        }
+        .notes span {
+            position: absolute;
+            bottom: 3px;
+            width: 35px;
+            text-align: center;
+        }
+        .for_notes {
+            position: relative;
+        }
+        .noteB {
+            width: 54px;
+            position: absolute;
+            z-index: 100;
+            left: -20px;
+            background-color: #333;
+            height: 210px;
+            color: #777;
+            border-radius: 0px 0px 5px 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div style="height:80% !important" class="right-content panel-right" id="rightMobile">
+            <div class="black_back" style="display: none; z-index: 3; width: 100%;height: 600%;background-color: var(--black-back-background); position: fixed;top: 0;left: 0;">
+            </div>
+            <div class="contain panelContain">
+                <div class="containPiano notes">
+                    <div class="notes noteW" id="F2"><span>F2 (A)</span></div>
+                    <div class="forF_2 for_notes">
+                        <div class="notes noteB" id="F_2"><span>F#2 (W)</span></div>
+                    </div>
+                    <div class="notes noteW" id="G2"><span>G2 (S)</span></div>
+                    <div class="forG_2 for_notes">
+                        <div class="notes noteB" id="G_2"><span>G#2 (E)</span></div>
+                    </div>
+                    <div class="notes noteW" id="A2"><span>A2 (D)</span></div>
+                    <div class="forA_2 for_notes">
+                        <div class="notes noteB" id="A_2"><span>A#2 (R)</span></div>
+                    </div>
+                    <div class="notes noteW" id="B2"><span>B2 (F)</span></div>
+                    <div class="notes noteW" id="C3"><span>C3 (G)</span></div>
+                    <div class="forD_3 for_notes">
+                        <div class="notes noteB" id="C_3"><span>C#3 (Y)</span></div>
+                    </div>
+                    <div class="notes noteW" id="D3"><span>D3 (H)</span></div>
+                    <div class="forD_3 for_notes">
+                        <div class="notes noteB" id="D_3"><span>D#3 (U)</span></div>
+                    </div>
+                    <div class="notes noteW" id="E3"><span>E3 (J)</span></div>
+                    <div class="notes noteW" id="F3"><span>F3 (K)</span></div>
+                </div>
+            </div>
+            <br>
+        </div>
+    </div>
+    </div>
+    <script>
+        document.addEventListener('keyup', function(e) {
+            if (e.keyCode == 65) { //A
+                document.getElementById('F2').style.backgroundColor = "white";
+            }
+            if (e.keyCode == 87) { //W
+                document.getElementById('F_2').style.backgroundColor = "#333";
+            }
+            if (e.keyCode == 83) { //S
+                document.getElementById('G2').style.backgroundColor = "white";
+            }
+            if (e.keyCode == 69) { //E
+                document.getElementById('G_2').style.backgroundColor = "#333";
+            }
+            if (e.keyCode == 68) { //D
+                document.getElementById('A2').style.backgroundColor = "white";
+            }
+            if (e.keyCode == 82) { //R
+                document.getElementById('A_2').style.backgroundColor = "#333";
+            }
+            if (e.keyCode == 70) { //F
+                document.getElementById('B2').style.backgroundColor = "white";
+            }
+            if (e.keyCode == 71) { //G
+                document.getElementById('C3').style.backgroundColor = "white";
+            }
+            if (e.keyCode == 89) { //Y
+                document.getElementById('C_3').style.backgroundColor = "#333";
+            }
+            if (e.keyCode == 72) { //H
+                document.getElementById('D3').style.backgroundColor = "white";
+            }
+            if (e.keyCode == 85) { //U
+                document.getElementById('D_3').style.backgroundColor = "#333";
+            }
+            if (e.keyCode == 74) { //J
+                document.getElementById('E3').style.backgroundColor = "white";
+            }
+            if (e.keyCode == 75) { //U
+                document.getElementById('F3').style.backgroundColor = "white";
+            }
+        });
+        function playNote(path) {
+            let audio = new Audio(path);
+            audio.play();
+        }
+        document.addEventListener('keydown', function(e) {
+            if (e.repeat) return;
+            if (e.keyCode == 65) { //A
+                playNote('music/playF2.mp3');
+                document.getElementById('F2').style.backgroundColor = "lightgrey";
+            }
+            if (e.keyCode == 87) { //W
+                playNote('music/playF_2.mp3');
+                document.getElementById('F_2').style.backgroundColor = "#222";
+            }
+            if (e.keyCode == 83) { //S
+                playNote('music/playG2.mp3');
+                document.getElementById('G2').style.backgroundColor = "lightgrey";
+            }
+            if (e.keyCode == 69) { //E
+                playNote('music/playG_2.mp3');
+                document.getElementById('G_2').style.backgroundColor = "#222";
+            }
+            if (e.keyCode == 68) { //D
+                playNote('music/playA2.mp3');
+                document.getElementById('A2').style.backgroundColor = "lightgrey";
+            }
+            if (e.keyCode == 82) { //R
+                playNote('music/playA_2.mp3');
+                document.getElementById('A_2').style.backgroundColor = "#222";
+            }
+            if (e.keyCode == 70) { //F
+                playNote('music/playB2.mp3');
+                document.getElementById('B2').style.backgroundColor = "lightgrey";
+            }
+            if (e.keyCode == 71) { //G
+                playNote('music/playC3.mp3');
+                document.getElementById('C3').style.backgroundColor = "lightgrey";
+            }
+            if (e.keyCode == 89) { //Y
+                playNote('music/playC_3.mp3');
+                document.getElementById('C_3').style.backgroundColor = "#222";
+            }
+            if (e.keyCode == 72) { //H
+                playNote('music/playD3.mp3');
+                document.getElementById('D3').style.backgroundColor = "lightgrey";
+            }
+            if (e.keyCode == 85) { //U
+                playNote('music/playD_3.mp3');
+                document.getElementById('D_3').style.backgroundColor = "#222";
+            }
+            if (e.keyCode == 74) { //J
+                playNote('music/playE3.mp3');
+                document.getElementById('E3').style.backgroundColor = "lightgrey";
+            }
+            if (e.keyCode == 75) { //U
+                playNote('music/playF3.mp3');
+                document.getElementById('F3').style.backgroundColor = "lightgrey";
+            }
+        });
+    </script>
+</body>
+</html>
